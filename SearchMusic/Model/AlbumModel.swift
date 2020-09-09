@@ -9,7 +9,7 @@
 import UIKit
 
 struct AlbumModel {
-    let name: String
-    let image: UIImage
-    let description: String
+    let albumName: String
+    let albumImage: String
+    let albumDescription: String
 }

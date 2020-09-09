@@ -27,7 +27,14 @@ class ViewController: UIViewController {
         
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.searchBar.endEditing(true)
+    }
     
+    @IBAction func tapToHideKeyboard(_ sender: UITapGestureRecognizer) {
+        self.searchBar.resignFirstResponder()
+    }
     
 }
 
@@ -37,10 +44,16 @@ class ViewController: UIViewController {
 extension ViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
         if searchBar.text != "" {
-            albumManager.fetchAlbum(name: searchBar.text!)
+            albumManager.fetchAlbum(name: searchBar.text!) { [weak self] in
+                self?.albumArray = $0
+                self?.collectionView.reloadData()
+                print(self?.albumArray?.count)
+            }
         }
     }
+    
     
 }
 
@@ -48,6 +61,14 @@ extension ViewController: UISearchBarDelegate {
 
 extension ViewController: UICollectionViewDelegate {
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToSingList", sender: self)
+        collectionView.deselectItem(at: indexPath, animated: true)
+    }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let destinationVC = segue.destination as! SingsViewController
+//    }
 }
 
 //MARK: - Collection view data source methods
@@ -66,14 +87,10 @@ extension ViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ReusableCell", for: indexPath) as! AlbumViewCell
         
-        //cell.imageView.sd_setImage(with: URL(string: self.albumManager.albums[indexPath.item].image ))
         if albumArray?.isEmpty == false {
-            cell.imageView.image = self.albumArray?[indexPath.item].image
-            cell.nameLabel.text = self.albumArray?[indexPath.item].name
+            cell.imageView.sd_setImage(with: URL(string: self.albumArray?[indexPath.item].albumImage ?? "default_image"))
+            cell.nameLabel.text = self.albumArray?[indexPath.item].albumName
         }
-        
-        //        print(cell.imageView.image)
-        //        print(cell.nameLabel.text)
         return cell
         
     }

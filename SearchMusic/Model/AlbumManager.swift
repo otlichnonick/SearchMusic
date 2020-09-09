@@ -15,13 +15,14 @@ class AlbumManager {
     
     var albums = [AlbumModel]()
     
-    func fetchAlbum(name: String) {
-        let urlString = "\(itunesURL)term=\(name)&entity=album&limit=5"
-        performRequest(with: urlString)
-        //print(urlString)
+    func fetchAlbum(name: String, closure: @escaping ([AlbumModel]) -> Void) {
+        let urlString = "\(itunesURL)term=\(name)&entity=album"
+        self.performRequest(with: urlString) { albums in
+            closure(albums)
+        }
     }
     
-    func performRequest(with urlString: String) {
+    func performRequest(with urlString: String, closure: @escaping ([AlbumModel]) -> Void) {
         if let url = URL(string: urlString) {
             
             let session = URLSession(configuration: .default)
@@ -35,13 +36,14 @@ class AlbumManager {
                     if let safeAlbums = self.parseJSON(safeData) {
                         DispatchQueue.main.async {
                             self.albums = safeAlbums
+                            closure(self.albums)
+                            print(self.albums.count)
                         }
                     }
                 }
             }
             task.resume()
         }
-        print(albums)
     }
     
     func parseJSON(_ albumData: Data) -> [AlbumModel]? {
@@ -51,9 +53,9 @@ class AlbumManager {
             
             for item in 0..<decodeAlbumData.resultCount {
                 let name = decodeAlbumData.results[item].collectionName
-                let image = UIImage(named: decodeAlbumData.results[item].artworkUrl100)
+                let image = decodeAlbumData.results[item].artworkUrl100
                 let description = decodeAlbumData.results[item].collectionViewUrl
-                let albumModel = AlbumModel(name: name, image: image ?? UIImage(named: "default_image")!, description: description)
+                let albumModel = AlbumModel(albumName: name, albumImage: image, albumDescription: description)
                 array.append(albumModel)
             }
             return array
@@ -65,39 +67,3 @@ class AlbumManager {
     
     
 }
-
-
-
-
-
-//    func performRequest(with urlString: String, completion: @escaping (Data?) -> ()) {
-//        let url = URL(string: urlString)
-//        let urlRequest = URLRequest(url: url!)
-//
-//        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-//            if error != nil {
-//                print(error.debugDescription)
-//            } else {
-//                completion(data)
-//            }
-//        }.resume()
-//    }
-//
-//    func downloadAlbums(from urlString: String, completion: @escaping ([AlbumModel]) -> ()) {
-//        performRequest(with: urlString) { (data) in
-//            do {
-//                let decodeAlbumData = try JSONDecoder().decode(AlbumData.self, from: data!)
-//                var array = [AlbumModel]()
-//                for item in 0..<decodeAlbumData.resultCount {
-//                    let name = decodeAlbumData.results[item].collectionName
-//                    let image = UIImage(named: decodeAlbumData.results[item].artworkUrl100)
-//                    let description = decodeAlbumData.results[item].collectionViewUrl
-//                    let albumModel = AlbumModel(name: name, image: image ?? UIImage(named: "default_image")!, description: description)
-//                    array.append(albumModel)
-//                }
-//                completion(array)
-//            } catch {
-//                print("Error decoding data. \(error)")
-//            }
-//        }
-//    }
