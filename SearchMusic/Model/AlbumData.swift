@@ -17,4 +17,5 @@ struct Results: Codable {
     let collectionName: String
     let collectionViewUrl: String
     let artworkUrl100: String
+    let collectionId: Int
 }

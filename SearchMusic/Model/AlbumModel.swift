@@ -8,8 +8,13 @@
 
 import UIKit
 
-struct AlbumModel {
+struct AlbumModel: Equatable {
     let albumName: String
     let albumImage: String
     let albumDescription: String
+    let albumID: Int
+}
+
+struct SingsModel {
+    
 }

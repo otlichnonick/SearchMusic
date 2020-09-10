@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var backgroundImage: UIImageView!
     
     var albumManager = AlbumManager()
     var albumArray: [AlbumModel]?
@@ -24,20 +25,11 @@ class ViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         searchBar.delegate = self
-        
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        self.searchBar.endEditing(true)
-    }
-    
-    @IBAction func tapToHideKeyboard(_ sender: UITapGestureRecognizer) {
-        self.searchBar.resignFirstResponder()
+        searchBar.searchTextField.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
+        self.dismissKey()
     }
     
 }
-
 
 //MARK: - Search bar delegate methods
 
@@ -46,14 +38,13 @@ extension ViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         if searchBar.text != "" {
-            albumManager.fetchAlbum(name: searchBar.text!) { [weak self] in
+            let newName = searchBar.text!.replacingOccurrences(of: " ", with: "+")
+            albumManager.fetchAlbum(name: newName) { [weak self] in
                 self?.albumArray = $0
                 self?.collectionView.reloadData()
-                print(self?.albumArray?.count)
             }
         }
     }
-    
     
 }
 
@@ -62,13 +53,14 @@ extension ViewController: UISearchBarDelegate {
 extension ViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "goToSingList", sender: self)
-        collectionView.deselectItem(at: indexPath, animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "SingsViewController") as! SingsViewController
+        if let album = albumArray?[indexPath.item] {
+            vc.urlString = album.albumDescription
+        }
+        navigationController?.pushViewController(vc, animated: true)
+        searchBar.resignFirstResponder()
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let destinationVC = segue.destination as! SingsViewController
-//    }
 }
 
 //MARK: - Collection view data source methods
@@ -76,7 +68,7 @@ extension ViewController: UICollectionViewDelegate {
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if albumArray == nil {
-            return 1
+            return 0
         } else {
             return albumArray!.count
         }
@@ -90,11 +82,23 @@ extension ViewController: UICollectionViewDataSource {
         if albumArray?.isEmpty == false {
             cell.imageView.sd_setImage(with: URL(string: self.albumArray?[indexPath.item].albumImage ?? "default_image"))
             cell.nameLabel.text = self.albumArray?[indexPath.item].albumName
+            backgroundImage.alpha = 0.3
         }
         return cell
         
     }
-    
-    
+}
+
+//MARK: - Dismiss keyboard method
+
+extension UIViewController {
+    func dismissKey() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
 
