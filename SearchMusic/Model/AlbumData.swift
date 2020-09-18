@@ -10,12 +10,25 @@ import Foundation
 
 struct AlbumData: Codable {
     let resultCount: Int
-    let results: [Results]
+    let results: [ResultsAlbum]
 }
 
-struct Results: Codable {
+struct ResultsAlbum: Codable {
     let collectionName: String
-    let collectionViewUrl: String
     let artworkUrl100: String
     let collectionId: Int
+    let artistName: String
+    let collectionPrice: Double?
+    let trackCount: Int
+    let releaseDate: Date?
+    let primaryGenreName: String
+}
+
+struct SongData: Codable {
+    let resultCount: Int
+    let results: [ResultSong]
+}
+
+struct ResultSong: Codable {
+    let trackName: String?
 }

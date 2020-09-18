@@ -1,5 +1,5 @@
 //
-//  AlbumModel.swift
+//  Model.swift
 //  SearchMusic
 //
 //  Created by Антон on 07.09.2020.
@@ -11,10 +11,14 @@ import UIKit
 struct AlbumModel: Equatable {
     let albumName: String
     let albumImage: String
-    let albumDescription: String
     let albumID: Int
+    let albumGenre: String
+    let albumDataRelease: Date?
+    let albumPrice: Double?
+    let songCount: Int
+    let artistName: String
 }
 
-struct SingsModel {
-    
+struct SongModel {
+    let songName: String?
 }

@@ -7,23 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A6CF4702511F53500E4BE0D /* SongViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CF46F2511F53500E4BE0D /* SongViewCell.swift */; };
+		3A6CF4742513784100E4BE0D /* noimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6CF4732513784100E4BE0D /* noimage.png */; };
 		3A7D075C250270AF004BE700 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7D075B250270AF004BE700 /* AppDelegate.swift */; };
 		3A7D075E250270AF004BE700 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7D075D250270AF004BE700 /* SceneDelegate.swift */; };
 		3A7D0760250270AF004BE700 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7D075F250270AF004BE700 /* ViewController.swift */; };
 		3A7D0763250270AF004BE700 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A7D0761250270AF004BE700 /* Main.storyboard */; };
 		3A7D0765250270B3004BE700 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A7D0764250270B3004BE700 /* Assets.xcassets */; };
 		3A7D0768250270B3004BE700 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A7D0766250270B3004BE700 /* LaunchScreen.storyboard */; };
-		3A7D0771250277F7004BE700 /* SingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7D0770250277F7004BE700 /* SingsViewController.swift */; };
-		3A7D07752502783A004BE700 /* AlbumManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7D07742502783A004BE700 /* AlbumManager.swift */; };
+		3A7D0771250277F7004BE700 /* SongsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7D0770250277F7004BE700 /* SongsViewController.swift */; };
+		3A7D07752502783A004BE700 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7D07742502783A004BE700 /* NetworkManager.swift */; };
 		3A7D0777250607E4004BE700 /* AlbumData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7D0776250607E4004BE700 /* AlbumData.swift */; };
-		3A7D0779250611EF004BE700 /* AlbumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7D0778250611EF004BE700 /* AlbumModel.swift */; };
+		3A7D0779250611EF004BE700 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7D0778250611EF004BE700 /* Model.swift */; };
 		3A7D077B250617B3004BE700 /* AlbumViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7D077A250617B3004BE700 /* AlbumViewCell.swift */; };
-		3A7D077F250767A7004BE700 /* default_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A7D077E250767A7004BE700 /* default_image.jpg */; };
 		3ABA358B250A2B9100AECB09 /* albums.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3ABA358A250A2B8F00AECB09 /* albums.jpg */; };
 		688C3AEAF287E37BB64E76B8 /* Pods_SearchMusic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8459F76829932CCE3470D6A /* Pods_SearchMusic.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A6CF46F2511F53500E4BE0D /* SongViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewCell.swift; sourceTree = "<group>"; };
+		3A6CF4732513784100E4BE0D /* noimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noimage.png; sourceTree = "<group>"; };
 		3A7D0758250270AF004BE700 /* SearchMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A7D075B250270AF004BE700 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A7D075D250270AF004BE700 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -32,12 +35,11 @@
 		3A7D0764250270B3004BE700 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A7D0767250270B3004BE700 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A7D0769250270B3004BE700 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A7D0770250277F7004BE700 /* SingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingsViewController.swift; sourceTree = "<group>"; };
-		3A7D07742502783A004BE700 /* AlbumManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumManager.swift; sourceTree = "<group>"; };
+		3A7D0770250277F7004BE700 /* SongsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsViewController.swift; sourceTree = "<group>"; };
+		3A7D07742502783A004BE700 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3A7D0776250607E4004BE700 /* AlbumData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumData.swift; sourceTree = "<group>"; };
-		3A7D0778250611EF004BE700 /* AlbumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumModel.swift; sourceTree = "<group>"; };
+		3A7D0778250611EF004BE700 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		3A7D077A250617B3004BE700 /* AlbumViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewCell.swift; sourceTree = "<group>"; };
-		3A7D077E250767A7004BE700 /* default_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = default_image.jpg; path = "../../../../../../../Downloads/illustration-of-music-application-icon/default_image.jpg"; sourceTree = "<group>"; };
 		3ABA358A250A2B8F00AECB09 /* albums.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = albums.jpg; sourceTree = "<group>"; };
 		80DD3F2BFD04F7E827049056 /* Pods-SearchMusic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchMusic.release.xcconfig"; path = "Target Support Files/Pods-SearchMusic/Pods-SearchMusic.release.xcconfig"; sourceTree = "<group>"; };
 		A8459F76829932CCE3470D6A /* Pods_SearchMusic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SearchMusic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,8 +96,8 @@
 		3A7D075A250270AF004BE700 /* SearchMusic */ = {
 			isa = PBXGroup;
 			children = (
+				3A6CF4732513784100E4BE0D /* noimage.png */,
 				3ABA358A250A2B8F00AECB09 /* albums.jpg */,
-				3A7D077E250767A7004BE700 /* default_image.jpg */,
 				3A7D077325027809004BE700 /* Model */,
 				3A7D0772250277FE004BE700 /* View */,
 				3A7D076F250277CD004BE700 /* Controller */,
@@ -112,7 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				3A7D075F250270AF004BE700 /* ViewController.swift */,
-				3A7D0770250277F7004BE700 /* SingsViewController.swift */,
+				3A7D0770250277F7004BE700 /* SongsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -128,10 +130,11 @@
 		3A7D077325027809004BE700 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3A7D07742502783A004BE700 /* AlbumManager.swift */,
+				3A7D07742502783A004BE700 /* NetworkManager.swift */,
 				3A7D0776250607E4004BE700 /* AlbumData.swift */,
-				3A7D0778250611EF004BE700 /* AlbumModel.swift */,
+				3A7D0778250611EF004BE700 /* Model.swift */,
 				3A7D077A250617B3004BE700 /* AlbumViewCell.swift */,
+				3A6CF46F2511F53500E4BE0D /* SongViewCell.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -196,8 +199,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A6CF4742513784100E4BE0D /* noimage.png in Resources */,
 				3ABA358B250A2B9100AECB09 /* albums.jpg in Resources */,
-				3A7D077F250767A7004BE700 /* default_image.jpg in Resources */,
 				3A7D0768250270B3004BE700 /* LaunchScreen.storyboard in Resources */,
 				3A7D0765250270B3004BE700 /* Assets.xcassets in Resources */,
 				3A7D0763250270AF004BE700 /* Main.storyboard in Resources */,
@@ -253,14 +256,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A7D07752502783A004BE700 /* AlbumManager.swift in Sources */,
+				3A7D07752502783A004BE700 /* NetworkManager.swift in Sources */,
 				3A7D0760250270AF004BE700 /* ViewController.swift in Sources */,
 				3A7D077B250617B3004BE700 /* AlbumViewCell.swift in Sources */,
+				3A6CF4702511F53500E4BE0D /* SongViewCell.swift in Sources */,
 				3A7D075C250270AF004BE700 /* AppDelegate.swift in Sources */,
-				3A7D0779250611EF004BE700 /* AlbumModel.swift in Sources */,
+				3A7D0779250611EF004BE700 /* Model.swift in Sources */,
 				3A7D0777250607E4004BE700 /* AlbumData.swift in Sources */,
 				3A7D075E250270AF004BE700 /* SceneDelegate.swift in Sources */,
-				3A7D0771250277F7004BE700 /* SingsViewController.swift in Sources */,
+				3A7D0771250277F7004BE700 /* SongsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

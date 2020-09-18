@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var backgroundImage: UIImageView!
     
-    var albumManager = AlbumManager()
+    var networkManager = NetworkManager()
     var albumArray: [AlbumModel]?
     
     override func viewDidLoad() {
@@ -39,7 +39,7 @@ extension ViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
         if searchBar.text != "" {
             let newName = searchBar.text!.replacingOccurrences(of: " ", with: "+")
-            albumManager.fetchAlbum(name: newName) { [weak self] in
+            networkManager.fetchAlbum(name: newName) { [weak self] in
                 self?.albumArray = $0
                 self?.collectionView.reloadData()
             }
@@ -54,12 +54,13 @@ extension ViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "SingsViewController") as! SingsViewController
+        let vc = storyboard.instantiateViewController(identifier: "SingsViewController") as! SongsViewController
         if let album = albumArray?[indexPath.item] {
-            vc.urlString = album.albumDescription
+            vc.currentAlbum = album
+            vc.configure()
+            navigationController?.pushViewController(vc, animated: true)
+            searchBar.resignFirstResponder()
         }
-        navigationController?.pushViewController(vc, animated: true)
-        searchBar.resignFirstResponder()
     }
 }
 
@@ -80,7 +81,7 @@ extension ViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ReusableCell", for: indexPath) as! AlbumViewCell
         
         if albumArray?.isEmpty == false {
-            cell.imageView.sd_setImage(with: URL(string: self.albumArray?[indexPath.item].albumImage ?? "default_image"))
+            cell.imageView.sd_setImage(with: URL(string: self.albumArray?[indexPath.item].albumImage ?? "noimage"))
             cell.nameLabel.text = self.albumArray?[indexPath.item].albumName
             backgroundImage.alpha = 0.3
         }
