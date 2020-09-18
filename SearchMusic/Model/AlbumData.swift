@@ -20,7 +20,7 @@ struct ResultsAlbum: Codable {
     let artistName: String
     let collectionPrice: Double?
     let trackCount: Int
-    let releaseDate: Date?
+    let releaseDate: String
     let primaryGenreName: String
 }
 

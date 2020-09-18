@@ -13,7 +13,7 @@ struct AlbumModel: Equatable {
     let albumImage: String
     let albumID: Int
     let albumGenre: String
-    let albumDataRelease: Date?
+    let albumDataRelease: String
     let albumPrice: Double?
     let songCount: Int
     let artistName: String

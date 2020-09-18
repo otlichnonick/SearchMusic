@@ -48,7 +48,7 @@ class SongsViewController: UIViewController {
         albumImage.sd_setImage(with: URL(string: currentAlbum?.albumImage ?? "noimage"), completed: nil)
         albumName.text = currentAlbum?.albumName
         albumGenre.text = currentAlbum?.albumGenre
-        albumDataRelease.text = currentAlbum?.albumDataRelease?.description
+        albumDataRelease.text = currentAlbum?.albumDataRelease
         albumPrice.text = currentAlbum?.albumPrice?.description
         songCount.text = currentAlbum?.songCount.description
         artistName.text = currentAlbum?.artistName

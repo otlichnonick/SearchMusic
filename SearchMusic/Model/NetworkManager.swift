@@ -27,22 +27,18 @@ class NetworkManager {
                 if let safeData = data {
                     do {
                         var array = [AlbumModel]()
-                        let decoder = JSONDecoder()
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-                        decoder.dateDecodingStrategy = .formatted(formatter)
-                        let decodeAlbumData = try decoder.decode(AlbumData.self, from: safeData)
+                        let decodeAlbumData = try JSONDecoder().decode(AlbumData.self, from: safeData)
                         for item in 0..<decodeAlbumData.resultCount {
                             let album = decodeAlbumData.results[item]
                             let name = album.collectionName
                             let image = album.artworkUrl100
                             let id = album.collectionId
                             let genre = album.primaryGenreName
-                            let date = album.releaseDate
+                            let newDate = self.convertDateFromWebToApp(date: album.releaseDate)
                             let artist = album.artistName
                             let price = album.collectionPrice
                             let count = album.trackCount
-                            let newAlbum = AlbumModel(albumName: name, albumImage: image, albumID: id, albumGenre: genre, albumDataRelease: date, albumPrice: price, songCount: count, artistName: artist)
+                            let newAlbum = AlbumModel(albumName: name, albumImage: image, albumID: id, albumGenre: genre, albumDataRelease: newDate, albumPrice: price, songCount: count, artistName: artist)
                             array.append(newAlbum)
                         }
                         array.sort { $0.albumName.lowercased() < $1.albumName.lowercased() }
@@ -71,8 +67,7 @@ class NetworkManager {
                 if let safeData = data {
                     do {
                         var array = [SongModel]()
-                        let decoder = JSONDecoder()
-                        let decodeSongData = try decoder.decode(SongData.self, from: safeData)
+                        let decodeSongData = try JSONDecoder().decode(SongData.self, from: safeData)
                         for item in 0..<decodeSongData.resultCount {
                             let name = decodeSongData.results[item].trackName
                             let newSong = SongModel(songName: name)
@@ -80,7 +75,6 @@ class NetworkManager {
                             array.append(newSong)
                             }
                         }
-                        //array.sort { $0.songName!.lowercased() < $1.songName!.lowercased() }
                         DispatchQueue.main.async {
                             self.songs = array
                             closure(self.songs)
@@ -92,6 +86,15 @@ class NetworkManager {
             }
             task.resume()
         }
+    }
+    
+    func convertDateFromWebToApp(date: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let date = dateFormatter.date(from: date)
+        dateFormatter.dateStyle = .medium
+        return dateFormatter.string(from: date!)
     }
     
 }
